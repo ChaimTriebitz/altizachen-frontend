@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { NavBar } from './cmps';
 import { ForgotPassword, Home, Login, Register, ResetPassword } from './pages';
 function App() {
+   console.log('init');
    return (
       <div className="App">
          <NavBar />
