@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after {
+   box-sizing: border-box;
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   font: inherit;
+}
+
+html,
+body {
+   height: 100%;
+}
+
+html:focus-within {
+   scroll-behavior: smooth;
+}
+
+body {
+   background: $color-9;
+   color: $color-3;
+   text-rendering: optimizeSpeed;
+   line-height: 1.5;
+   font-family: 'Poppins', sans-serif;
+}
+
+ul[role="list"],
+ol[role="list"] {
+   list-style: none;
+}
+
+img,
+picture,
+svg {
+   display: block;
+   max-width: 100%;
+}
+
+button,
+a,
+label {
+   cursor: pointer;
+   background-color: transparent;
+   border: none;
+   text-decoration: none;
+
+   &:hover {
+      opacity: 0.9;
+   }
+}
+
+input,
+select,
+textarea {
+   outline: none;
+   border: none;
+   background: none;
+}
+
+dialog {
+   border: none;
+}
+
+dialog::backdrop {
+   background: rgb(0 0 0 / 0.4);
+}
+
+:focus-visible {
+   border-radius: none;
+   border: none;
+   outline: none;
+}
+
+::-webkit-scrollbar {
+   width: 0.5rem;
+   height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+   background: $color-4;
+}
+
+::-webkit-scrollbar-thumb {
+   background: $color-2;
+   border-radius: 5px;
+}

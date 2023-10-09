@@ -1,0 +1,112 @@
+.form {
+   width: 90%;
+   max-width: 400px;
+   margin: 2em auto;
+   background-color: rgba(255, 255, 255, 0.05);
+   border-radius: 10px;
+   border: 2px solid rgba(255, 255, 255, 0.05);
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+   padding: 1em 2em;
+
+   .input {
+      position: relative;
+
+      label {
+         display: block;
+         margin-top: 1em;
+         font-weight: 500;
+         color: $color-9;
+
+
+         &:hover::after {
+            background: $color-3 !important;
+         }
+
+         &:has(+ input[hidden])::after {
+            transition: 0.5s;
+            content: url('../../assets/imgs/image-upload.png');
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: #fcfcfc;
+            border-radius: 3px;
+            padding: 0 0.5em;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+         }
+
+         &:has(+ input:placeholder-shown) {
+            visibility: hidden;
+         }
+
+         &:has(+ select.no-value) {
+            visibility: hidden;
+         }
+
+
+      }
+
+      input,
+      select {
+         height: 50px;
+         width: 100%;
+         background-color: $color-9;
+         border-radius: 3px;
+         padding: 0 0.5em;
+         font-weight: 500;
+
+         &::placeholder {
+            color: $color-4;
+         }
+
+
+      }
+
+      .images {
+         position: absolute;
+         bottom: 0em;
+         display: flex;
+
+         img {
+            height: 50px;
+         }
+      }
+   }
+
+
+
+   button {
+      margin-top: 2em;
+      width: 100%;
+      background: $color-1;
+      color: $color-9;
+      padding: 0.75em 0;
+      font-weight: 500;
+      border-radius: 5px;
+   }
+
+   .error {
+      height: 1em;
+      margin-top: 0.5em;
+      color: $color-4;
+   }
+
+   nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 1em;
+      margin-top: 1em;
+
+      a {
+         flex: 1;
+         text-align: center;
+         background: $color-2;
+         color: $color-9;
+         padding: 0.25em 0;
+      }
+   }
+}
