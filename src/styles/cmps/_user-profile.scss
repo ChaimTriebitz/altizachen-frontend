@@ -1,0 +1,19 @@
+.user-profile-container {
+   position: fixed;
+   top: 80px;
+   right: -100%;
+
+   &.open {
+      right: 0;
+
+      transition: 0.25s ease-out;
+   }
+
+   transition: 1s ease-in;
+
+}
+
+.user-profile {
+   max-width: 300px;
+   background: $color-1;
+}

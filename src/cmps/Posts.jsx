@@ -25,7 +25,6 @@ export const Posts = () => {
          console.log(error);
       }
    }
-   console.log(posts);
 
    return (
       <div className='posts'>

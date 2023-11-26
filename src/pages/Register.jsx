@@ -7,6 +7,7 @@ export const Register = () => {
    const login = useLogInUser()
    const { values, handleChange, resetValues } = useForm({ username: '', email: '', password: '', avatar: '' })
    const [err, setErr] = useState('')
+   const [image, setImage] = useState('')
    const nameInputRef = useRef(null)
 
    useEffect(() => {
@@ -20,10 +21,9 @@ export const Register = () => {
          login(data.token)
       } catch (error) {
          setErr(error?.response?.data?.error || error?.message + ' !')
-         resetValues()
       }
    }
-
+   console.log(values);
    const handleImageChange = (e) => {
       const reader = new FileReader()
       reader.readAsDataURL(e.target.files[0])
@@ -39,8 +39,9 @@ export const Register = () => {
    console.log(values);
    return (
       <div className='page register'>
-         <article className='form'>
-            <form onSubmit={handleSubmit}>
+         <form onSubmit={handleSubmit} className='form'>
+            <div className="input">
+
                <label htmlFor="name">name</label>
                <input
                   ref={nameInputRef}
@@ -50,6 +51,10 @@ export const Register = () => {
                   value={values.username}
                   onChange={handleChange}
                />
+            </div>
+            <div className="input">
+
+
                <label htmlFor="email">email</label>
                <input
                   id='email'
@@ -59,6 +64,10 @@ export const Register = () => {
                   value={values.email}
                   onChange={handleChange}
                />
+            </div>
+            <div className="input">
+
+
                <label htmlFor="password">password</label>
                <input
                   id='password'
@@ -67,7 +76,9 @@ export const Register = () => {
                   value={values.password}
                   onChange={handleChange}
                />
-               <label htmlFor="image">upload image</label>
+            </div>
+            <div className="input">
+               <label htmlFor="image" className='single'>{values.avatar && <img src={values.avatar} alt="" />}</label>
                <input
                   id='image'
                   placeholder='image'
@@ -75,15 +86,15 @@ export const Register = () => {
                   accept='image/png,image/jpeg,image/jpg,image/jfif'
                   onChange={handleImageChange}
                   name='avatar'
+                  hidden
                />
-               <h2 className='error'>{err}</h2>
-               <button>submit</button>
-               <nav>
-                  <Link to='/login'>Login</Link>
-               </nav>
-            </form>
-         </article>
-
+            </div>
+            <h2 className='error'>{err}</h2>
+            <button>submit</button>
+            <nav>
+               <Link to='/login'>Login</Link>
+            </nav>
+         </form>
       </div>
    )
 }

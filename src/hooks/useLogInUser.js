@@ -16,7 +16,6 @@ export const useLogInUser = (tok) => {
    const login = async (tok) => {
       localStorage.setItem('authToken', tok)
       try {
-         // if()
          const { data } = await axios.get(`http://localhost:5000/api/users`, {
             headers: {
                "Content-Type": "application/json",

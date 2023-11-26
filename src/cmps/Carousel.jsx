@@ -4,7 +4,6 @@ import { svgs } from '../assets/svgs'
 
 
 export function Carousel({ children }) {
-   console.log(children);
    const [imageIndex, setImageIndex] = useState(0)
 
    function showNextImage() {

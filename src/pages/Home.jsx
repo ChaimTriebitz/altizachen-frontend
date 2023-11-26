@@ -25,9 +25,8 @@ export const Home = () => {
       <div className='page home'>
          <button onClick={() => logout()}>Logout</button>
          {/* <button onClick={ai}>ai</button> */}
-         <div>lorem*1000</div>
          <Posts />
-         <CreatePost />
+         {/* <CreatePost /> */}
       </div>
    )
 }

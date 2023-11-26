@@ -1,0 +1,88 @@
+{
+   "currencies": [
+      {
+         "name": "US Dollar",
+         "symbol": "$"
+      },
+      {
+         "name": "Euro",
+         "symbol": "€"
+      },
+      {
+         "name": "Shekel",
+         "symbol": "₪"
+      }
+   ],
+   "categories": [
+      {
+         "name": "Electronics",
+         "subcategories": [
+            "Smartphones",
+            "Laptops",
+            "Audio Equipment",
+            "Cameras",
+            "Gaming Consoles"
+         ]
+      },
+      {
+         "name": "Clothing and Accessories",
+         "subcategories": [
+            "Clothes",
+            "Shoes",
+            "Bags",
+            "Jewelry",
+            "Watches"
+         ]
+      },
+      {
+         "name": "Furniture",
+         "subcategories": [
+            "Tables",
+            "Chairs",
+            "Sofas",
+            "Bedroom Furniture",
+            "Office Furniture"
+         ]
+      },
+      {
+         "name": "Books and Media",
+         "subcategories": [
+            "Books",
+            "Movies",
+            "Music",
+            "Video Games",
+            "Magazines"
+         ]
+      },
+      {
+         "name": "Sports and Outdoor",
+         "subcategories": [
+            "Sporting Equipment",
+            "Bicycles",
+            "Camping Gear",
+            "Outdoor Furniture",
+            "Fitness Equipment"
+         ]
+      },
+      {
+         "name": "Home Appliances",
+         "subcategories": [
+            "Kitchen Appliances",
+            "Washing Machines",
+            "Refrigerators",
+            "Vacuum Cleaners",
+            "Air Conditioners"
+         ]
+      },
+      {
+         "name": "Toys and Games",
+         "subcategories": [
+            "Board Games",
+            "Action Figures",
+            "Dolls",
+            "Outdoor Toys",
+            "Puzzles"
+         ]
+      }
+   ]
+}

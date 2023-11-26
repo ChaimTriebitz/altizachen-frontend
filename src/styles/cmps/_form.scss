@@ -1,36 +1,46 @@
 .form {
-   width: 90%;
+   padding: 1em;
+   flex-direction: column;
    max-width: 400px;
-   margin: 2em auto;
-   background-color: rgba(255, 255, 255, 0.05);
-   border-radius: 10px;
-   border: 2px solid rgba(255, 255, 255, 0.05);
-   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-   padding: 1em 2em;
 
    .input {
       position: relative;
+      flex-direction: column;
 
       label {
-         display: block;
-         margin-top: 1em;
          font-weight: 500;
          color: $color-9;
 
+         &[for="image"] {
+            min-height: 100px;
+
+            img {}
+         }
+
+         &.single {
+            img {
+               position: absolute;
+               inset: 0;
+               width: 100%;
+               height: 100%;
+               object-fit: contain;
+            }
+         }
 
          &:hover::after {
-            background: $color-3 !important;
+            opacity: 1 !important;
+
          }
 
          &:has(+ input[hidden])::after {
+            opacity: 0.25;
+            position: absolute;
+            inset: 0;
             transition: 0.5s;
-            content: url('../../assets/imgs/image-upload.png');
-            display: block;
-            height: 50px;
+            content: url('../../assets/imgs/upload-100.png');
+            font-size: 3em;
             width: 100%;
-            background-color: #fcfcfc;
-            border-radius: 3px;
-            padding: 0 0.5em;
+            height: 100%;
             display: inline-flex;
             justify-content: center;
             align-items: center;
@@ -51,7 +61,7 @@
 
       input,
       select {
-         height: 50px;
+         height: 2em;
          width: 100%;
          background-color: $color-9;
          border-radius: 3px;
@@ -67,11 +77,13 @@
 
       .images {
          position: absolute;
-         bottom: 0em;
-         display: flex;
+         inset: 0;
+         justify-content: center;
+         align-items: center;
+         z-index: 0;
 
          img {
-            height: 50px;
+            // height: 50px;
          }
       }
    }
@@ -79,13 +91,13 @@
 
 
    button {
-      margin-top: 2em;
       width: 100%;
-      background: $color-1;
+      background: $color-5;
       color: $color-9;
       padding: 0.75em 0;
       font-weight: 500;
       border-radius: 5px;
+      justify-content: center;
    }
 
    .error {

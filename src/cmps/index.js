@@ -1,7 +1,7 @@
+import ImageDisplay from './ImageDisplay.jsx'
 import { YouTubeDownloader } from './YouTubeDownloader.jsx'
 import { YouTubeScraper } from './YouTubeScraper.jsx'
 import { ImageUploader } from './ImageUploader.jsx'
-import ImageDisplay from './ImageDisplay.jsx'
 import { ImageGallery } from './ImageGallery.jsx'
 import { NavBar } from './NavBar.jsx'
 import { Profile } from './Profile.jsx'
@@ -10,9 +10,11 @@ import { Post } from './Post.jsx'
 import { CreatePost } from './CreatePost.jsx'
 import { Carousel } from './Carousel.jsx'
 import { Chats } from './Chats.jsx'
+import { UserProfile } from './UserProfile.jsx'
 
 
 export {
+   UserProfile,
    YouTubeDownloader,
    YouTubeScraper,
    ImageUploader,

@@ -7,8 +7,10 @@
 
 @import 'base/elements';
 @import 'base/layout';
+@import 'base/_btns.scss';
 
 @import 'cmps/navbar';
 @import 'cmps/form';
 @import 'cmps/carousel';
 @import 'cmps/posts';
+@import 'cmps/_user-profile.scss';

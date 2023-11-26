@@ -7,6 +7,14 @@
    position: relative;
    z-index: 10;
 
+   .user-section {
+      button {
+
+         min-width: 25px;
+         min-height: 25px;
+      }
+   }
+
    .hamburger-section {
 
       button {

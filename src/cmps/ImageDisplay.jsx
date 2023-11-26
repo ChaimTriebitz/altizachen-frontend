@@ -11,6 +11,7 @@ const ImageDisplay = ({ publicId, isAvatar = false }) => {
          cloudName: 'dlyxlzh2y',
       }
    })
+   
    const myImage = cld.image(publicId)
 
    if (isAvatar) myImage.resize(thumbnail().width(50).height(50).gravity(focusOn(FocusOn.face())))

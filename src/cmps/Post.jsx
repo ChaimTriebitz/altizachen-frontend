@@ -3,8 +3,8 @@ import { Carousel, ImageDisplay } from './'
 
 export const Post = ({ post }) => {
    return (
-      <article  className='post'>
-         <section>
+      <article className='post'>
+         <section className='images'>
             {
                post.images.length &&
                <Carousel>
@@ -16,23 +16,12 @@ export const Post = ({ post }) => {
                </Carousel>
             }
          </section>
-         <section>
-            <div>
-               <strong>seller</strong>
-               <span>:</span>
-               <h1>{post.user.username}</h1>
-            </div>
-            <div>
-               <strong>title</strong>
-               <span>:</span>
-               <h2>{post.title}</h2>
-            </div>
-            <div>
-               <strong>item</strong>
-               <span>:</span>
-               <h3>{post.description}</h3>
-            </div>
+         <section className='details'>
+            <h1>{post.category}</h1>
+            <h2>{post.title}</h2>
+            <h3>{post.description}</h3>
          </section>
+
 
       </article>
    )

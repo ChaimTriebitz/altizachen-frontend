@@ -1,25 +1,27 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { svgs } from '../assets/svgs';
-import React, { useState } from 'react';
-import { useGlobalState } from '../hooks';
+import React, { useRef, useState } from 'react';
+import { useBlur, useGlobalState } from '../hooks';
 import { Profile } from './Profile';
 import ImageDisplay from './ImageDisplay';
+import { UserProfile } from './UserProfile';
 
 const pages = [
    { name: 'login', link: 'login' },
    { name: 'register', link: 'register' },
    { name: 'home', link: '/' },
    { name: 'about', link: 'about' },
+   { name: 'create', link: 'create_post' },
 ];
 
-const handleUserClick = () =>{
 
-}
 
 export const NavBar = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false)
+   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false)
    const { search, pathname } = useLocation()
    const { loggedInUser } = useGlobalState()
+   const userProfileRef = useBlur(() => setIsUserProfileOpen(false))
 
    return (
       <div className='nav-bar'>
@@ -30,7 +32,6 @@ export const NavBar = () => {
          </section>
 
 
-
          <section className={isMenuOpen ? 'nav open' : 'nav'}>
             {
                pages.map(page =>
@@ -39,15 +40,17 @@ export const NavBar = () => {
             }
          </section>
 
-         <section className='user-section'>
+         <section className='user-section' ref={userProfileRef}>
             {
                loggedInUser ?
-                  <button onClick={handleUserClick}>
-                     <ImageDisplay publicId={loggedInUser.avatar} isAvatar={true} />
+                  <button onClick={() => setIsUserProfileOpen(!isUserProfileOpen)}>
+                     <ImageDisplay publicId={loggedInUser?.avatar} isAvatar={true} />
                   </button>
                   : svgs.avatar
             }
-            {/* <Profile /> */}
+            <div className={`user-profile-container ${isUserProfileOpen ? 'open' : ''}`}>
+               {loggedInUser && <UserProfile />}
+            </div>
          </section>
 
          <section className='hamburger-section'>

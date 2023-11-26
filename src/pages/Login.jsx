@@ -9,7 +9,7 @@ export const Login = () => {
    const [err, setErr] = useState('')
    const { values, handleChange, resetValues } = useForm({ email: '', password: '' })
    const { loggedInUser, dispatch } = useGlobalState()
-   
+
    useEffect(() => {
       if (ls.checkForItem('authToken')) login(ls.checkForItem('authToken'))
    }, [])
@@ -34,8 +34,8 @@ export const Login = () => {
 
    return (
       <div className="page login">
-         <article className='form'>
-            <form onSubmit={handleSubmit}>
+         <form onSubmit={handleSubmit} className='form'>
+            <div className="input">
                <label htmlFor="email">email</label>
                <input
                   placeholder='email'
@@ -45,6 +45,8 @@ export const Login = () => {
                   value={values.email}
                   onChange={handleChange}
                />
+            </div>
+            <div className="input">
                <label htmlFor="password">password</label>
                <input
                   placeholder='password'
@@ -53,14 +55,14 @@ export const Login = () => {
                   value={values.password}
                   onChange={handleChange}
                />
-               <button>submit</button>
-            </form>
-            <p className='error'>{err}</p>
-            <nav>
-               <Link to='/register'>Register</Link>
-               <Link to='/forgotpassword'>Forgot Password</Link>
-            </nav>
-         </article>
+            </div>
+            <button>submit</button>
+         </form>
+         <p className='error'>{err}</p>
+         <nav>
+            <Link to='/register'>Register</Link>
+            <Link to='/forgotpassword'>Forgot Password</Link>
+         </nav>
       </div>
    )
 }
