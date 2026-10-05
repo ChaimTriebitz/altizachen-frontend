@@ -92,25 +92,25 @@ export const EditPost = () => {
                   <div className="input"><label htmlFor="currency">Currency</label><select id="currency" name="currency" value={values.currency} onChange={handleChange} required><option value="">Currency</option>{OPTIONS.currencies.map((option, i) => <option key={i} value={option.name}>{option.symbol} {option.name}</option>)}</select></div>
                </div>
                <div className="input"><label htmlFor="description">Description</label><textarea id="description" name="description" value={values.description} onChange={handleChange} required maxLength={5000} /></div>
-               <div className="input image-edit-field">
-                  <label>Photos</label>
-                  <div className="image-edit-grid">
-                     {values.images.map((image, index) => (
-                        <div className="image-edit-item" key={image + '-' + index}>
-                           <img src={image.startsWith('data:image/') || image.startsWith('http') ? image : 'https://res.cloudinary.com/dlyxlzh2y/image/upload/f_auto,q_auto,w_500/' + image} alt={'Listing photo ' + (index + 1)} />
-                           {index === 0 && <span className="image-cover-label">Cover</span>}
-                           <button type="button" className="image-remove-btn" onClick={() => removeImage(index)} aria-label={'Remove photo ' + (index + 1)}>×</button>
+               <div className="input photo-input">
+                  <label htmlFor="image">Photos <span>{values.images.length}/8</span></label>
+                  <div className="photo-grid">
+                     {values.images.map((image, i) => (
+                        <div className="photo-preview" key={image + '-' + i}>
+                           <img src={image.startsWith('data:image/') || image.startsWith('http') ? image : 'https://res.cloudinary.com/dlyxlzh2y/image/upload/f_auto,q_auto,w_500/' + image} alt={'Listing photo ' + (i + 1)} />
+                           <button type="button" onClick={() => removeImage(i)} aria-label={'Remove photo ' + (i + 1)}>×</button>
+                           {i === 0 && <span className="cover-badge">Cover</span>}
                         </div>
                      ))}
-                     {values.images.length < MAX_IMAGES && (
-                        <button type="button" className="image-add-btn" onClick={() => fileInputRef.current?.click()}>
-                           <span>+</span>
-                           <small>Add photo</small>
-                        </button>
+                     {values.images.length < 8 && (
+                        <label className="add-photo" htmlFor="image">
+                           <strong>+</strong>
+                           <span>{values.images.length ? 'Add more' : 'Add photos'}</span>
+                           <small>{8 - values.images.length} remaining</small>
+                        </label>
                      )}
                   </div>
-                  <input ref={fileInputRef} type="file" accept="image/png,image/jpeg,image/jpg,image/webp,image/jfif" multiple onChange={handleUploadImages} hidden />
-                  <small className="image-help">{values.images.length}/{MAX_IMAGES} photos · The first photo is the cover</small>
+                  <input ref={fileInputRef} type="file" id="image" accept="image/png,image/jpeg,image/jpg,image/webp" onChange={handleUploadImages} multiple hidden />
                </div>
                {err && <p className="error" role="alert">{err}</p>}
                <button className="submit-btn" disabled={saving}>{saving ? 'Saving…' : 'Save changes'}</button>
