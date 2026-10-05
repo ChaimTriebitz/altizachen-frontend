@@ -3,7 +3,7 @@ import { svgs } from '../assets/svgs'
 import { cloneElement } from 'react'
 
 export function Carousel({ children }) {
-   const items = Array.isArray(children) ? children : [children]
+   const items = useMemo(() => Array.isArray(children) ? children : [children], [children])
    const [imageIndex, setImageIndex] = useState(0)
    const [invalidIndexes, setInvalidIndexes] = useState([])
 
