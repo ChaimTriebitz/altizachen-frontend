@@ -13,6 +13,7 @@ export const Listing = () => {
    const [loading, setLoading] = useState(true)
    const [viewerOpen, setViewerOpen] = useState(false)
    const [recentlyViewed, setRecentlyViewed] = useLocalStorage('altizachen-recently-viewed', [])
+   const { loggedInUser } = require('../hooks').useGlobalState()
 
    useEffect(() => {
       let active = true
@@ -49,7 +50,9 @@ export const Listing = () => {
                   <div className="seller-avatar">{post.user?.username?.charAt(0)?.toUpperCase() || '?'}</div>
                   <div><span>Seller</span><strong>{post.user?.username || 'Unknown seller'}</strong></div>
                </div>
-               <button className="primary-action contact-btn" type="button" onClick={() => navigate('/messages')}>Contact seller</button>
+               {post.user?._id !== loggedInUser?._id && (
+                  <button className="primary-action contact-btn" type="button" onClick={() => navigate('/messages')}>Contact seller</button>
+               )}
             </div>
          </section>
          {viewerOpen && <ImageLightbox images={post.images || []} onClose={() => setViewerOpen(false)} />}
