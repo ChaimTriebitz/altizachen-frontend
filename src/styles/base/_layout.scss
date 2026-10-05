@@ -1,15 +1,90 @@
 .App {
+   min-height: 100vh;
+   width: 100%;
    display: flex;
    flex-direction: column;
-   min-height: 100vh;
-   width: 100vw;
 }
 
+.app-main { flex: 1; min-width: 0; }
+
 .page {
+   width: 100%;
+   min-height: calc(100vh - 76px);
+   display: flex;
    flex-direction: column;
-   flex: 1;
-   .form{
-      background: $color-2;
-   
-   }
+}
+
+.eyebrow {
+   display: inline-block;
+   color: $color-5;
+   font-size: .72rem;
+   font-weight: 800;
+   letter-spacing: .14em;
+   text-transform: uppercase;
+}
+
+.primary-action,
+.submit-btn,
+.filter-btn {
+   min-height: 44px;
+   padding: .7rem 1.1rem;
+   border-radius: 10px;
+   background: $color-5;
+   color: #fff;
+   font-weight: 700;
+   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.primary-action:hover,
+.submit-btn:hover,
+.filter-btn:hover {
+   background: $color-1;
+   transform: translateY(-1px);
+   box-shadow: 0 8px 18px rgba(15, 118, 110, .18);
+}
+
+.primary-action:disabled,
+.submit-btn:disabled { opacity: .55; cursor: wait; transform: none; }
+
+.back-btn {
+   display: inline-flex;
+   align-items: center;
+   gap: .4rem;
+   color: $color-3;
+   font-weight: 700;
+   padding: .4rem 0;
+}
+
+.loading-state,
+.loading-card,
+.empty-state {
+   width: min(100% - 2rem, 1100px);
+   margin: 2rem auto;
+   padding: 3rem 1.5rem;
+   text-align: center;
+   border-radius: 18px;
+   background: #fff;
+   border: 1px solid #e5ebe8;
+}
+
+.empty-state h2,
+.empty-state h1 { margin-bottom: .45rem; }
+.empty-state p { color: $color-3; margin-bottom: 1.25rem; }
+
+.spinner {
+   width: 18px;
+   height: 18px;
+   display: inline-block;
+   margin-right: .5rem;
+   border: 2px solid #d7e2df;
+   border-top-color: $color-5;
+   border-radius: 50%;
+   vertical-align: -4px;
+   animation: spin .7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 640px) {
+   .page { min-height: calc(100vh - 64px); }
 }
