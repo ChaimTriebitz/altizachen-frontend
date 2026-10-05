@@ -91,10 +91,11 @@ export const UserProfile = ({ onClose }) => {
          </div>
          <form className="form" onSubmit={handleSubmit}>
             <div className="profile-avatar">
-               <label htmlFor="profile-image">
+               <div className="profile-avatar-image">
                   <ImageDisplay publicId={values.avatar} isAvatar={false} />
-                  <span>Change photo</span>
-               </label>
+               </div>
+               <label className="profile-photo-btn" htmlFor="profile-image">Change photo</label>
+               <span className="profile-photo-hint">JPG, PNG or WebP</span>
                <input type="file" id="profile-image" accept="image/png,image/jpeg,image/jpg,image/webp" onChange={handleImageChange} hidden />
             </div>
             <div className="input"><label htmlFor="profile-username">Username</label><input id="profile-username" name="username" value={values.username} onChange={handleChange} required /></div>
