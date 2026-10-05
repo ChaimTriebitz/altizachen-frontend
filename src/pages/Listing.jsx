@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 import axios from 'axios'
 import { Carousel, ImageDisplay, ImageLightbox, ListingActions } from '../cmps'
 import API_URL from '../config/api'
@@ -11,11 +12,12 @@ export const Listing = () => {
    const [error, setError] = useState('')
    const [loading, setLoading] = useState(true)
    const [viewerOpen, setViewerOpen] = useState(false)
+   const [recentlyViewed, setRecentlyViewed] = useLocalStorage('altizachen-recently-viewed', [])
 
    useEffect(() => {
       let active = true
       axios.get(API_URL + '/posts/' + id)
-         .then(res => { if (active) setPost(res.data) })
+         .then(res => { if (active) { setPost(res.data); setRecentlyViewed(current => [res.data, ...current.filter(item => item._id !== res.data._id)].slice(0, 8)) } })
          .catch(err => { if (active) setError(err?.response?.data?.message || 'Listing not found') })
          .finally(() => { if (active) setLoading(false) })
       return () => { active = false }
