@@ -11,7 +11,7 @@ export const Home = () => {
                <h1>Find it. Sell it. <span>Move on.</span></h1>
                <p>Buy and sell second-hand items from people in your community.</p>
             </div>
-            <button className="primary-action" onClick={() => navigate('/create_post')}>
+            <button className="primary-action" onClick={() => navigate(localStorage.getItem('authToken') ? '/create_post' : '/login')}>
                Sell an item
             </button>
          </section>
