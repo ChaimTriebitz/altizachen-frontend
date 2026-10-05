@@ -1,32 +1,31 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useGlobalState, useLogInUser } from '../hooks';
-import { CreatePost, Posts } from '../cmps'
-import axios from 'axios';
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useLogInUser } from '../hooks'
+import { Posts } from '../cmps'
 
 export const Home = () => {
-   const { loggedInUser } = useGlobalState()
    const { login, logout } = useLogInUser()
    const navigate = useNavigate()
-
    const tok = localStorage.getItem('authToken')
 
    useEffect(() => {
       if (!tok || tok === 'undefined') navigate('/login')
       else login(tok)
-   }, [])
-
-   // const ai = async () => {
-   //    axios.post('http://localhost:5000/api/ai', { question: 'who was the first president of the united states of America' })
-   // }
-
+   }, [tok, navigate, login])
 
    return (
       <div className='page home'>
-         <button onClick={() => logout()}>Logout</button>
-         {/* <button onClick={ai}>ai</button> */}
+         <div className='home-header'>
+            <div>
+               <h1>Marketplace</h1>
+               <p>Buy and sell with Altizachen.</p>
+            </div>
+            <div>
+               <button onClick={() => navigate('/create_post')}>Sell an item</button>
+               <button onClick={logout}>Logout</button>
+            </div>
+         </div>
          <Posts />
-         {/* <CreatePost /> */}
       </div>
    )
 }
