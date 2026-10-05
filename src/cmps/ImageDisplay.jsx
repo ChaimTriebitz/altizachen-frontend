@@ -10,6 +10,11 @@ const ImageDisplay = ({ publicId, isAvatar = false }) => {
       return isAvatar ? <span className="avatar-fallback" aria-hidden="true">?</span> : null
    }
 
+   // Local development listings may store compressed data URLs when Cloudinary is not configured.
+   if (publicId.startsWith('data:image/')) {
+      return <img className={isAvatar ? 'image-avatar' : undefined} src={publicId} alt="" />
+   }
+
    const cld = new Cloudinary({ cloud: { cloudName: 'dlyxlzh2y' } })
    const myImage = cld.image(publicId)
 
