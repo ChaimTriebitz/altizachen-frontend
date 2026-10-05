@@ -1,0 +1,2 @@
+button { transition: opacity .18s ease, transform .18s ease; }
+button:hover:not(:disabled) { opacity: .96; }
