@@ -95,7 +95,6 @@ export const UserProfile = ({ onClose }) => {
                   <ImageDisplay publicId={values.avatar} isAvatar={false} />
                </div>
                <label className="profile-photo-btn" htmlFor="profile-image">Change photo</label>
-               <span className="profile-photo-hint">JPG, PNG or WebP</span>
                <input type="file" id="profile-image" accept="image/png,image/jpeg,image/jpg,image/webp" onChange={handleImageChange} hidden />
             </div>
             <div className="input"><label htmlFor="profile-username">Username</label><input id="profile-username" name="username" value={values.username} onChange={handleChange} required /></div>
