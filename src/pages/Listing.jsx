@@ -13,7 +13,7 @@ export const Listing = () => {
    const [error, setError] = useState('')
    const [loading, setLoading] = useState(true)
    const [viewerOpen, setViewerOpen] = useState(false)
-   const [recentlyViewed, setRecentlyViewed] = useLocalStorage('altizachen-recently-viewed', [])
+   const [, setRecentlyViewed] = useLocalStorage('altizachen-recently-viewed', [])
    const { loggedInUser } = useGlobalState()
 
    useEffect(() => {
@@ -23,7 +23,7 @@ export const Listing = () => {
          .catch(err => { if (active) setError(err?.response?.data?.message || 'Listing not found') })
          .finally(() => { if (active) setLoading(false) })
       return () => { active = false }
-   }, [id])
+   }, [id, setRecentlyViewed])
 
    if (loading) return <main className="page listing-page"><div className="loading-card">Loading listing…</div></main>
    if (error) return <main className="page listing-page"><div className="empty-state"><h1>We couldn't find that listing</h1><p>{error}</p><button className="primary-action" onClick={() => navigate('/')}>Back to listings</button></div></main>
