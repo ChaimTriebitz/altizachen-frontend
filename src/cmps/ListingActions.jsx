@@ -54,9 +54,14 @@ export const ListingActions = ({ post }) => {
             {copied ? '✓ Link copied' : '↗ Share'}
          </button>
          {isOwner && (
-            <button type="button" className="action-btn danger" onClick={removeListing} disabled={deleting}>
-               {deleting ? 'Deleting…' : 'Delete'}
-            </button>
+            <>
+               <button type="button" className="action-btn" onClick={() => navigate('/listing/' + post._id + '/edit')}>
+                  Edit
+               </button>
+               <button type="button" className="action-btn danger" onClick={removeListing} disabled={deleting}>
+                  {deleting ? 'Deleting…' : 'Delete'}
+               </button>
+            </>
          )}
       </div>
    )
