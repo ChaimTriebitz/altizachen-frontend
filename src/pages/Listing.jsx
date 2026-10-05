@@ -4,6 +4,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage'
 import axios from 'axios'
 import { Carousel, ImageDisplay, ImageLightbox, ListingActions } from '../cmps'
 import API_URL from '../config/api'
+import { useGlobalState } from '../hooks'
 
 export const Listing = () => {
    const { id } = useParams()
@@ -13,7 +14,7 @@ export const Listing = () => {
    const [loading, setLoading] = useState(true)
    const [viewerOpen, setViewerOpen] = useState(false)
    const [recentlyViewed, setRecentlyViewed] = useLocalStorage('altizachen-recently-viewed', [])
-   const { loggedInUser } = require('../hooks').useGlobalState()
+   const { loggedInUser } = useGlobalState()
 
    useEffect(() => {
       let active = true
