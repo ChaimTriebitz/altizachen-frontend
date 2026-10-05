@@ -1,11 +1,7 @@
 import { useRef, useState } from 'react'
 import { useGlobalState } from './useGlobalState'
-import { ACTIONS } from '../state'
-
-
-
 export const useDraggableRows = (tableData) => {
-   const { dispatch, page } = useGlobalState()
+   const { page } = useGlobalState()
    const [draggedRowIdx, setDraggedRowIdx] = useState(null)
    const dragOverRowIdx = useRef(null)
 
