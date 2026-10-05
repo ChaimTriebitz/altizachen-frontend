@@ -1,20 +1,25 @@
-import { Route, Routes } from 'react-router-dom';
-import { CreatePost, NavBar } from './cmps';
-import { ForgotPassword, Home, Login, Register, ResetPassword } from './pages';
+import { Route, Routes } from 'react-router-dom'
+import { CreatePost, NavBar } from './cmps'
+import { ForgotPassword, Home, Listing, Login, Messages, Register, ResetPassword } from './pages'
+
 function App() {
    return (
       <div className="App">
          <NavBar />
-         <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/create_post' element={<CreatePost />} />
-            <Route path='login' element={<Login />} />
-            <Route path='register' element={<Register />} />
-            <Route path='forgotpassword' element={<ForgotPassword />} />
-            <Route path='resetpassword/:resetToken' element={<ResetPassword />} />
-         </Routes>
+         <main className="app-main">
+            <Routes>
+               <Route path="/" element={<Home />} />
+               <Route path="/listing/:id" element={<Listing />} />
+               <Route path="/create_post" element={<CreatePost />} />
+               <Route path="/messages" element={<Messages />} />
+               <Route path="/login" element={<Login />} />
+               <Route path="/register" element={<Register />} />
+               <Route path="/forgotpassword" element={<ForgotPassword />} />
+               <Route path="/resetpassword/:resetToken" element={<ResetPassword />} />
+            </Routes>
+         </main>
       </div>
-   );
+   )
 }
 
-export default App;
+export default App
