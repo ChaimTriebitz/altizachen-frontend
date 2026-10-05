@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useForm } from '../hooks'
 
 export const ForgotPassword = () => {
-   const { values, handleChange, resetValues } = useForm({ email: '' })
+   const { values, handleChange } = useForm({ email: '' })
    const [err, setErr] = useState('')
 
    const handleSubmit = async (e) => {
