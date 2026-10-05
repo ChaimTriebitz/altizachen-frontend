@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLogInUser } from '../hooks'
-import { Posts } from '../cmps'
+import { Posts, RecentlyViewed } from '../cmps'
 
 export const Home = () => {
    const { login, logout } = useLogInUser()
@@ -26,6 +26,7 @@ export const Home = () => {
             </button>
          </section>
          <Posts />
+         <RecentlyViewed />
       </div>
    )
 }
