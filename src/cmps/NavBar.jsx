@@ -20,7 +20,7 @@ export const NavBar = () => {
 
          <nav className={isMenuOpen ? 'nav open' : 'nav'} aria-label="Main navigation">
             <NavLink to="/" end onClick={closeMenu}>Home</NavLink>
-            {loggedInUser && <NavLink to="/create_post" onClick={closeMenu}>Sell an item</NavLink>}
+            <NavLink to={loggedInUser ? '/create_post' : '/login'} onClick={closeMenu}>Sell an item</NavLink>
             {!loggedInUser && <NavLink to="/login" onClick={closeMenu}>Log in</NavLink>}
             {!loggedInUser && <NavLink to="/register" onClick={closeMenu}>Register</NavLink>}
          </nav>
