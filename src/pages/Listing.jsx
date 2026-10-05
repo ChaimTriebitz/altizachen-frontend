@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { Carousel, ImageDisplay } from '../cmps'
 import API_URL from '../config/api'
 
 export const Listing = () => {
@@ -11,24 +12,42 @@ export const Listing = () => {
    const [loading, setLoading] = useState(true)
 
    useEffect(() => {
+      let active = true
       axios.get(API_URL + '/posts/' + id)
-         .then(res => setPost(res.data))
-         .catch(err => setError(err?.response?.data?.message || 'Listing not found'))
-         .finally(() => setLoading(false))
+         .then(res => { if (active) setPost(res.data) })
+         .catch(err => { if (active) setError(err?.response?.data?.message || 'Listing not found') })
+         .finally(() => { if (active) setLoading(false) })
+      return () => { active = false }
    }, [id])
 
-   if (loading) return <p>Loading listing...</p>
-   if (error) return <p className='error'>{error}</p>
+   if (loading) return <main className="page listing-page"><div className="loading-card">Loading listing…</div></main>
+   if (error) return <main className="page listing-page"><div className="empty-state"><h1>We couldn't find that listing</h1><p>{error}</p><button className="primary-action" onClick={() => navigate('/')}>Back to listings</button></div></main>
+
+   const price = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(post.price)
 
    return (
-      <main className='page listing-page'>
-         <button onClick={() => navigate(-1)}>Back</button>
-         <h1>{post.title}</h1>
-         <p>{post.category}</p>
-         <h2>{post.price} {post.currency}</h2>
-         <p>{post.description}</p>
-         {post.user && <p>Seller: {post.user.username}</p>}
-         <button onClick={() => navigate('/messages')}>Contact seller</button>
+      <main className="page listing-page">
+         <div className="listing-topbar">
+            <button className="back-btn" onClick={() => navigate(-1)}>← Back</button>
+         </div>
+         <section className="listing-detail">
+            <div className="listing-media">
+               {post.images?.length ? (
+                  <Carousel>{post.images.map(img => <ImageDisplay publicId={img} key={img} />)}</Carousel>
+               ) : <div className="listing-no-image">No photo available</div>}
+            </div>
+            <div className="listing-info">
+               <span className="category-pill">{post.category}</span>
+               <h1>{post.title}</h1>
+               <div className="listing-price">{price} <small>{post.currency}</small></div>
+               <p className="listing-description">{post.description}</p>
+               <div className="seller-card">
+                  <div className="seller-avatar">{post.user?.username?.charAt(0)?.toUpperCase() || '?'}</div>
+                  <div><span>Seller</span><strong>{post.user?.username || 'Unknown seller'}</strong></div>
+               </div>
+               <Link className="primary-action contact-btn" to="/messages">Contact seller</Link>
+            </div>
+         </section>
       </main>
    )
 }
