@@ -1,4 +1,4 @@
-import { showSuccessMsg, showWarningMsg } from './msgEvent';
+import { showSuccessMsg } from './msgEvent';
 
 export const copyTextToClipboard = async (text) => {
    try {
