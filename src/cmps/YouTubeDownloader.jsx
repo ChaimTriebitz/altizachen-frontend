@@ -13,7 +13,7 @@ export const YouTubeDownloader = () => {
    const handleSubmit = async (e) => {
       e.preventDefault()
       try {
-         const { data } = await axios.post(`http://localhost:5000/api/private`, { url }, config)
+         await axios.post(`http://localhost:5000/api/private`, { url }, config)
       } catch (error) {
          console.log(error);
       }
