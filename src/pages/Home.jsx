@@ -14,17 +14,17 @@ export const Home = () => {
    }, [tok, navigate, login])
 
    return (
-      <div className='page home'>
-         <div className='home-header'>
-            <div>
-               <h1>Marketplace</h1>
-               <p>Buy and sell with Altizachen.</p>
+      <div className="page home">
+         <section className="home-hero">
+            <div className="hero-copy">
+               <span className="eyebrow">ALTIZACHEN MARKETPLACE</span>
+               <h1>Find it. Sell it. <span>Move on.</span></h1>
+               <p>Buy and sell second-hand items from people in your community.</p>
             </div>
-            <div>
-               <button onClick={() => navigate('/create_post')}>Sell an item</button>
-               <button onClick={logout}>Logout</button>
-            </div>
-         </div>
+            <button className="primary-action" onClick={() => navigate('/create_post')}>
+               Sell an item
+            </button>
+         </section>
          <Posts />
       </div>
    )
