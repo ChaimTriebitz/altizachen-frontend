@@ -26,6 +26,7 @@ function evaluateCodeInString(str) {
          // Using Function constructor to safely execute the code
          // Note: Avoid using this with untrusted input as it can be dangerous
          // eslint-disable-next-line no-new-func
+         // eslint-disable-next-line no-new-func
          const result = new Function(`return (${code})`)();
          return result;
       } catch (error) {
