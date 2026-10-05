@@ -1,5 +1,5 @@
-import { Link, NavLink } from 'react-router-dom'
-import React, { useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { svgs } from '../assets/svgs'
 import { useGlobalState } from '../hooks'
 import ImageDisplay from './ImageDisplay'
@@ -9,31 +9,35 @@ const HomeIcon = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 1
 const PlusIcon = () => <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.8"/><path d="M12 8v8M8 12h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
 
 export const NavBar = () => {
-   const [isMenuOpen, setIsMenuOpen] = useState(false)
    const [isUserProfileOpen, setIsUserProfileOpen] = useState(false)
    const { loggedInUser } = useGlobalState()
+   const { pathname } = useLocation()
 
-   const closeMenu = () => setIsMenuOpen(false)
    const profileLetter = (loggedInUser?.email || loggedInUser?.username || '?').charAt(0).toUpperCase()
+
+   useEffect(() => {
+      setIsUserProfileOpen(false)
+   }, [pathname])
 
    return (
       <>
          <header className="nav-bar">
             <section className="logo-section">
-               <Link to="/" aria-label="Altizachen home" onClick={closeMenu}>{svgs.screen}</Link>
+               <Link to="/" aria-label="Altizachen home">{svgs.screen}</Link>
             </section>
 
-            <nav className={isMenuOpen ? 'nav open' : 'nav'} aria-label="Main navigation">
-               <NavLink to="/" end onClick={closeMenu}>Home</NavLink>
-               <NavLink to={loggedInUser ? '/create_post' : '/login'} onClick={closeMenu}>Sell an item</NavLink>
-               {!loggedInUser && <NavLink to="/login" onClick={closeMenu}>Log in</NavLink>}
-               {!loggedInUser && <NavLink to="/register" onClick={closeMenu}>Register</NavLink>}
+            <nav className="nav" aria-label="Main navigation">
+               <NavLink to="/" end>Home</NavLink>
+               <NavLink to={loggedInUser ? '/create_post' : '/login'}>Sell an item</NavLink>
+               {!loggedInUser && <NavLink to="/login">Log in</NavLink>}
+               {!loggedInUser && <NavLink to="/register">Register</NavLink>}
             </nav>
 
             {loggedInUser && (
                <section className="user-section">
                   <button
                      type="button"
+                     className={isUserProfileOpen ? 'profile-trigger active' : 'profile-trigger'}
                      aria-label="Open your profile"
                      aria-expanded={isUserProfileOpen}
                      onClick={() => setIsUserProfileOpen(prev => !prev)}
@@ -47,12 +51,6 @@ export const NavBar = () => {
                   </div>
                </section>
             )}
-
-            <section className="hamburger-section">
-               <button type="button" aria-label="Toggle navigation" aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
-                  {svgs.hamburger}
-               </button>
-            </section>
          </header>
 
          <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
@@ -72,6 +70,7 @@ export const NavBar = () => {
                   className={'mobile-nav-item ' + (isUserProfileOpen ? 'active' : '')}
                   onClick={() => setIsUserProfileOpen(prev => !prev)}
                   aria-expanded={isUserProfileOpen}
+                  aria-label="Open your profile"
                >
                   <span className="mobile-avatar">
                      {loggedInUser.avatar
@@ -87,6 +86,12 @@ export const NavBar = () => {
                </NavLink>
             )}
          </nav>
+
+         {loggedInUser && (
+            <div className={'mobile-profile-sheet ' + (isUserProfileOpen ? 'open' : '')}>
+               <UserProfile onClose={() => setIsUserProfileOpen(false)} />
+            </div>
+         )}
       </>
    )
 }
