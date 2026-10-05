@@ -14,9 +14,22 @@ export const CreatePost = () => {
    const tok = localStorage.getItem('authToken')
 
    const handleUploadImages = async (e) => {
-      const files = Array.from(e.target.files || []).slice(0, 8)
-      const converted = await Promise.all(files.map(file => convertBase64(file)))
-      handleChange({ target: { name: 'images', value: converted } })
+      const files = Array.from(e.target.files || [])
+      if (!files.length) return
+      const remaining = Math.max(0, 8 - values.images.length)
+      const selected = files.slice(0, remaining)
+      const converted = await Promise.all(selected.map(file => convertBase64(file)))
+      handleChange({ target: { name: 'images', value: [...values.images, ...converted] } })
+      e.target.value = ''
+   }
+
+   const removeImage = (index) => {
+      handleChange({
+         target: {
+            name: 'images',
+            value: values.images.filter((_, imageIndex) => imageIndex !== index)
+         }
+      })
    }
 
    const handleSubmit = async (e) => {
@@ -51,10 +64,22 @@ export const CreatePost = () => {
                </div>
                <div className="input"><label htmlFor="description">Description</label><textarea id="description" name="description" value={values.description} onChange={handleChange} placeholder="Describe the condition, age, included accessories, pickup details…" required maxLength={5000} /></div>
                <div className="input photo-input">
-                  <label htmlFor="image">Photos <span>Optional</span></label>
+                  <label htmlFor="image">Photos <span>{values.images.length}/8</span></label>
                   <div className="photo-grid">
-                     {values.images.map((image, i) => <img key={i} src={image} alt="" />)}
-                     <label className="add-photo" htmlFor="image"><strong>+</strong><span>Add photos</span></label>
+                     {values.images.map((image, i) => (
+                        <div className="photo-preview" key={i}>
+                           <img src={image} alt={'Listing photo ' + (i + 1)} />
+                           <button type="button" onClick={() => removeImage(i)} aria-label={'Remove photo ' + (i + 1)}>×</button>
+                           {i === 0 && <span className="cover-badge">Cover</span>}
+                        </div>
+                     ))}
+                     {values.images.length < 8 && (
+                        <label className="add-photo" htmlFor="image">
+                           <strong>+</strong>
+                           <span>{values.images.length ? 'Add more' : 'Add photos'}</span>
+                           <small>{8 - values.images.length} remaining</small>
+                        </label>
+                     )}
                   </div>
                   <input type="file" id="image" accept="image/png,image/jpeg,image/jpg,image/webp" onChange={handleUploadImages} multiple hidden />
                </div>
