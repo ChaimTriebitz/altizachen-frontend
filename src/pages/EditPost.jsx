@@ -57,6 +57,8 @@ export const EditPost = () => {
       setValues(current => ({ ...current, images: current.images.filter((_, imageIndex) => imageIndex !== index) }))
    }
 
+   const handleImageError = index => removeImage(index)
+
    const handleSubmit = async event => {
       event.preventDefault()
       setErr('')
@@ -78,12 +80,6 @@ export const EditPost = () => {
    return (
       <div className="page create-page">
          <div className="create-card">
-            <div className="create-heading">
-               <button className="back-btn" type="button" onClick={() => navigate(-1)}>← Back</button>
-               <span className="eyebrow">MY LISTING</span>
-               <h1>Edit listing</h1>
-               <p>Update the details and photos of your item.</p>
-            </div>
             <form onSubmit={handleSubmit} className="form create-form">
                <div className="input"><label htmlFor="title">Title</label><input id="title" name="title" value={values.title} onChange={handleChange} required maxLength={120} /></div>
                <div className="form-row">
@@ -97,7 +93,7 @@ export const EditPost = () => {
                   <div className="photo-grid">
                      {values.images.map((image, i) => (
                         <div className="photo-preview" key={image + '-' + i}>
-                           <img src={image.startsWith('data:image/') || image.startsWith('http') ? image : 'https://res.cloudinary.com/dlyxlzh2y/image/upload/f_auto,q_auto,w_500/' + image} alt={'Listing photo ' + (i + 1)} />
+                           <img src={image.startsWith('data:image/') || image.startsWith('http') ? image : 'https://res.cloudinary.com/dlyxlzh2y/image/upload/f_auto,q_auto,w_500/' + image} alt={'Listing photo ' + (i + 1)} onError={() => handleImageError(i)} />
                            <button type="button" onClick={() => removeImage(i)} aria-label={'Remove photo ' + (i + 1)}>×</button>
                            {i === 0 && <span className="cover-badge">Cover</span>}
                         </div>
