@@ -37,7 +37,7 @@ export const Register = () => {
             <div className="input"><label htmlFor="name">name</label><input ref={nameInputRef} id='name' name='username' value={values.username} onChange={handleChange} required /></div>
             <div className="input"><label htmlFor="email">email</label><input id='email' type="email" name='email' value={values.email} onChange={handleChange} required /></div>
             <div className="input"><label htmlFor="password">password</label><input id='password' type="password" name='password' value={values.password} onChange={handleChange} minLength={8} required /></div>
-            <div className="input"><label htmlFor="image" className='single'>{values.avatar && <img src={values.avatar} alt="Avatar preview" />}</label><input id='image' type="file' accept='image/png,image/jpeg,image/jpg,image/webp' onChange={handleImageChange} hidden /></div>
+            <div className="input"><label htmlFor="image" className='single'>{values.avatar && <img src={values.avatar} alt="Avatar preview" />}</label><input id='image' type="file" accept='image/png,image/jpeg,image/jpg,image/webp' onChange={handleImageChange} hidden /></div>
             <h2 className='error'>{err}</h2>
             <button type="submit">Create account</button>
             <nav><Link to='/login'>Login</Link></nav>
