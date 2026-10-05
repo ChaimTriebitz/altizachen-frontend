@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import { ACTIONS } from '../state'
 import { useGlobalState } from '../hooks'
@@ -14,7 +14,7 @@ export const Posts = () => {
    const [category, setCategory] = useState('')
    const [sort, setSort] = useState('newest')
 
-   const loadPosts = async (params = {}) => {
+   const loadPosts = useCallback(async (params = {}) => {
       setLoading(true)
       setError('')
       try {
@@ -28,9 +28,9 @@ export const Posts = () => {
       } finally {
          setLoading(false)
       }
-   }
+   }, [])
 
-   useEffect(() => { loadPosts({ sort, category: category || undefined }) }, [sort, category])
+   useEffect(() => { loadPosts({ sort, category: category || undefined }) }, [loadPosts, sort, category])
 
    const submitSearch = e => {
       e.preventDefault()
