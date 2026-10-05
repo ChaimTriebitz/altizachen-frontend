@@ -6,6 +6,7 @@ import { ForgotPassword } from './ForgotPassword.jsx'
 import { ResetPassword } from './ResetPassword.jsx'
 import { Messages } from './Messages.jsx'
 import { EditPost } from './EditPost.jsx'
+import { Profile } from './Profile.jsx'
 
 export {
    Home,
@@ -15,5 +16,6 @@ export {
    ForgotPassword,
    ResetPassword,
    Messages,
-   EditPost
+   EditPost,
+   Profile
 }
