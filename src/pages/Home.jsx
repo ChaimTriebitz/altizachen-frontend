@@ -1,18 +1,8 @@
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useLogInUser } from '../hooks'
 import { Posts, RecentlyViewed } from '../cmps'
 
 export const Home = () => {
-   const { login, logout } = useLogInUser()
    const navigate = useNavigate()
-   const tok = localStorage.getItem('authToken')
-
-   useEffect(() => {
-      if (!tok || tok === 'undefined') navigate('/login')
-      else login(tok)
-   }, [tok, navigate, login])
-
    return (
       <div className="page home">
          <section className="home-hero">
