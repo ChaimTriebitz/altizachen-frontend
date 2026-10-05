@@ -37,7 +37,12 @@ export const UserProfile = ({ onClose }) => {
          dispatch({ type: ACTIONS.SET, entity: 'loggedInUser', payload: data.user || data })
          setSaved(true)
       } catch (err) {
-         setError(err?.response?.data?.message || 'Could not save profile.')
+         setError(
+            err?.response?.data?.message ||
+            err?.response?.data?.error ||
+            err?.message ||
+            'Could not save profile.'
+         )
       } finally {
          setSaving(false)
       }
