@@ -1,70 +1,51 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { svgs } from '../assets/svgs';
-import React, { useRef, useState } from 'react';
-import { useBlur, useGlobalState } from '../hooks';
-import { Profile } from './Profile';
-import ImageDisplay from './ImageDisplay';
-import { UserProfile } from './UserProfile';
-
-const pages = [
-   { name: 'login', link: 'login' },
-   { name: 'register', link: 'register' },
-   { name: 'home', link: '/' },
-   { name: 'about', link: 'about' },
-   { name: 'create', link: 'create_post' },
-];
-
-
+import { Link, NavLink } from 'react-router-dom'
+import { svgs } from '../assets/svgs'
+import React, { useState } from 'react'
+import { useGlobalState } from '../hooks'
+import ImageDisplay from './ImageDisplay'
+import { UserProfile } from './UserProfile'
 
 export const NavBar = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false)
    const [isUserProfileOpen, setIsUserProfileOpen] = useState(false)
-   const { search, pathname } = useLocation()
    const { loggedInUser } = useGlobalState()
-   const userProfileRef = useBlur(() => setIsUserProfileOpen(false))
+
+   const closeMenu = () => setIsMenuOpen(false)
 
    return (
-      <div className='nav-bar'>
-
-
-         <section className='logo-section' >
-            <Link to='/'>{svgs.screen}</Link>
+      <header className="nav-bar">
+         <section className="logo-section">
+            <Link to="/" aria-label="Altizachen home" onClick={closeMenu}>{svgs.screen}</Link>
          </section>
 
+         <nav className={isMenuOpen ? 'nav open' : 'nav'} aria-label="Main navigation">
+            <NavLink to="/" end onClick={closeMenu}>Home</NavLink>
+            {loggedInUser && <NavLink to="/create_post" onClick={closeMenu}>Sell an item</NavLink>}
+            {!loggedInUser && <NavLink to="/login" onClick={closeMenu}>Log in</NavLink>}
+            {!loggedInUser && <NavLink to="/register" onClick={closeMenu}>Register</NavLink>}
+         </nav>
 
-         <section className={isMenuOpen ? 'nav open' : 'nav'}>
-            {
-               pages.map(page =>
-                  <NavLink key={page.link} to={pathname === page.link ? page.link + search : page.link}>{page.name}</NavLink>
-               )
-            }
-         </section>
+         {loggedInUser && (
+            <section className="user-section">
+               <button
+                  type="button"
+                  aria-label="Open your profile"
+                  aria-expanded={isUserProfileOpen}
+                  onClick={() => setIsUserProfileOpen(prev => !prev)}
+               >
+                  <ImageDisplay publicId={loggedInUser.avatar} isAvatar />
+               </button>
+               <div className={'user-profile-container ' + (isUserProfileOpen ? 'open' : '')}>
+                  <UserProfile onClose={() => setIsUserProfileOpen(false)} />
+               </div>
+            </section>
+         )}
 
-         <section className='user-section' ref={userProfileRef}>
-            {
-               loggedInUser ?
-                  <button onClick={() => setIsUserProfileOpen(!isUserProfileOpen)}>
-                     <ImageDisplay publicId={loggedInUser?.avatar} isAvatar={true} />
-                  </button>
-                  : svgs.avatar
-            }
-            <div className={`user-profile-container ${isUserProfileOpen ? 'open' : ''}`}>
-               {loggedInUser && <UserProfile />}
-            </div>
-         </section>
-
-         <section className='hamburger-section'>
-            <button onClick={() => setIsMenuOpen(prev => !prev)}>
+         <section className="hamburger-section">
+            <button type="button" aria-label="Toggle navigation" aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
                {svgs.hamburger}
             </button>
          </section>
-
-      </div >
+      </header>
    )
 }
-
-
-
-
-
-
