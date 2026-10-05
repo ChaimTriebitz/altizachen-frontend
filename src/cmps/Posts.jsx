@@ -54,7 +54,7 @@ export const Posts = () => {
    return (
       <section className="marketplace-listings">
          <div className="section-heading">
-            <div><span className="eyebrow">BROWSE</span><h2>Latest listings</h2></div>
+            <div><h2>Latest listings</h2></div>
             <span className="result-count">{posts.length} {posts.length === 1 ? 'listing' : 'listings'}</span>
          </div>
 
