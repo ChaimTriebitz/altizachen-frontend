@@ -11,7 +11,7 @@ const ImageDisplay = ({ publicId, isAvatar = false }) => {
    }
 
    // Local development listings may store compressed data URLs when Cloudinary is not configured.
-   if (publicId.startsWith('data:image/')) {
+   if (publicId.startsWith('data:image/') || publicId.startsWith('http://') || publicId.startsWith('https://')) {
       return <img className={isAvatar ? 'image-avatar' : undefined} src={publicId} alt="" />
    }
 
