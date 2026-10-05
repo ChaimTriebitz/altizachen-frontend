@@ -1,3 +1,5 @@
+import { Carousel, ImageDisplay } from './'
+
 export const Post = ({ post }) => {
    const price = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(post.price)
    return (
