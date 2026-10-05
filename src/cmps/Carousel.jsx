@@ -7,7 +7,10 @@ export function Carousel({ children }) {
 
    if (!items.length) return null
 
-   const stopClick = (event) => event.stopPropagation()
+   const stopClick = (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+   }
    const showNextImage = (event) => {
       stopClick(event)
       setImageIndex(index => index === items.length - 1 ? 0 : index + 1)
