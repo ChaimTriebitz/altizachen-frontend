@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { CreatePost, NavBar } from './cmps'
-import { ForgotPassword, Home, Listing, Login, Messages, Register, ResetPassword } from './pages'
+import { ForgotPassword, Home, Listing, Login, Register, ResetPassword } from './pages'
 
 function App() {
    return (
@@ -11,7 +11,6 @@ function App() {
                <Route path="/" element={<Home />} />
                <Route path="/listing/:id" element={<Listing />} />
                <Route path="/create_post" element={<CreatePost />} />
-               <Route path="/messages" element={<Messages />} />
                <Route path="/login" element={<Login />} />
                <Route path="/register" element={<Register />} />
                <Route path="/forgotpassword" element={<ForgotPassword />} />
