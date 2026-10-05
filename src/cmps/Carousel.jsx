@@ -7,8 +7,15 @@ export function Carousel({ children }) {
 
    if (!items.length) return null
 
-   const showNextImage = () => setImageIndex(index => index === items.length - 1 ? 0 : index + 1)
-   const showPrevImage = () => setImageIndex(index => index === 0 ? items.length - 1 : index - 1)
+   const stopClick = (event) => event.stopPropagation()
+   const showNextImage = (event) => {
+      stopClick(event)
+      setImageIndex(index => index === items.length - 1 ? 0 : index + 1)
+   }
+   const showPrevImage = (event) => {
+      stopClick(event)
+      setImageIndex(index => index === 0 ? items.length - 1 : index - 1)
+   }
 
    return (
       <div className="carousel" aria-label="Listing photos">
@@ -24,7 +31,7 @@ export function Carousel({ children }) {
             <button type="button" className="btn right" onClick={showNextImage} aria-label="Next photo">{svgs.arrowRight}</button>
             <div className="indicators" aria-label="Choose photo">
                {items.map((_, index) => (
-                  <button type="button" className={index === imageIndex ? 'indicator active' : 'indicator'} key={index} onClick={() => setImageIndex(index)} aria-label={'Show photo ' + (index + 1)} aria-current={index === imageIndex ? 'true' : undefined} />
+                  <button type="button" className={index === imageIndex ? 'indicator active' : 'indicator'} key={index} onClick={(event) => { stopClick(event); setImageIndex(index) }} aria-label={'Show photo ' + (index + 1)} aria-current={index === imageIndex ? 'true' : undefined} />
                ))}
             </div>
          </>}
