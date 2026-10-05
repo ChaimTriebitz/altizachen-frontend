@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { Route, Routes } from 'react-router-dom'
 import { CreatePost, NavBar } from './cmps'
-import { ForgotPassword, Home, Listing, Login, Messages, Register, ResetPassword } from './pages'
+import { EditPost, ForgotPassword, Home, Listing, Login, Messages, Register, ResetPassword } from './pages'
 import { useGlobalState } from './hooks'
 import { ACTIONS } from './state'
 import API_URL from './config/api'
@@ -31,6 +31,7 @@ function App() {
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/listing/:id" element={<Listing />} />
+               <Route path="/listing/:id/edit" element={<EditPost />} />
                <Route path="/create_post" element={<CreatePost />} />
                <Route path="/messages" element={<Messages />} />
                <Route path="/login" element={<Login />} />
