@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ACTIONS } from '../state'
 import { useGlobalState } from '../hooks'
@@ -14,7 +14,7 @@ export const Posts = () => {
    const [category, setCategory] = useState('')
    const [sort, setSort] = useState('newest')
 
-   const loadPosts = useCallback(async (params = {}) => {
+   const loadPosts = async (params = {}) => {
       setLoading(true)
       setError('')
       try {
@@ -28,14 +28,19 @@ export const Posts = () => {
       } finally {
          setLoading(false)
       }
-   }, [dispatch])
-
-   useEffect(() => { loadPosts({ sort, category: category || undefined }) }, [loadPosts, sort, category])
-
-   const submitSearch = e => {
-      e.preventDefault()
-      loadPosts({ search: search.trim(), sort, category: category || undefined })
    }
+
+   useEffect(() => {
+      const timer = setTimeout(() => {
+         loadPosts({
+            search: search.trim() || undefined,
+            sort,
+            category: category || undefined
+         })
+      }, 350)
+
+      return () => clearTimeout(timer)
+   }, [search, sort, category]) // eslint-disable-line react-hooks/exhaustive-deps
 
    const clearFilters = () => {
       setSearch('')
@@ -52,8 +57,13 @@ export const Posts = () => {
             <div><span className="eyebrow">BROWSE</span><h2>Latest listings</h2></div>
             <span className="result-count">{posts.length} {posts.length === 1 ? 'listing' : 'listings'}</span>
          </div>
-         <form className="listing-filters" onSubmit={submitSearch}>
-            <div className="search-field"><span>⌕</span><input aria-label="Search listings" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search listings…" /></div>
+
+         <div className="listing-filters">
+            <div className="search-field">
+               <span aria-hidden="true">⌕</span>
+               <input aria-label="Search listings" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search listings…" />
+               {search && <button type="button" className="search-clear" onClick={() => setSearch('')} aria-label="Clear search">×</button>}
+            </div>
             <select aria-label="Category" value={category} onChange={e => setCategory(e.target.value)}>
                <option value="">All categories</option>
                {OPTIONS.categories.map(categoryOption => <option key={categoryOption.name} value={categoryOption.name}>{categoryOption.name}</option>)}
@@ -64,9 +74,9 @@ export const Posts = () => {
                <option value="priceLow">Price: low to high</option>
                <option value="priceHigh">Price: high to low</option>
             </select>
-            <button className="filter-btn" type="submit">Search</button>
             {(search || category || sort !== 'newest') && <button className="clear-btn" type="button" onClick={clearFilters}>Clear</button>}
-         </form>
+         </div>
+
          <div className="posts">
             {posts.length ? posts.map(post => <Post key={post._id} post={post} />) : (
                <div className="empty-state no-results"><h2>No listings found</h2><p>Try a different search or clear your filters.</p><button className="primary-action" onClick={clearFilters}>Clear filters</button></div>
