@@ -17,6 +17,7 @@
    .nav a { padding: .55rem .85rem; border-radius: 8px; color: $color-3; font-size: .9rem; font-weight: 700; text-transform: capitalize; }
    .nav a:hover, .nav a.active { color: $color-5; background: $color-8; }
 
+   .hamburger-section { display: none; }
    .user-section { position: relative; margin-left: auto; margin-right: .5rem; z-index: 101; }
    .user-section > button {
       width: 42px;
@@ -38,13 +39,27 @@
 
 .mobile-bottom-nav { display: none; }
 
-.mobile-bottom-nav { display: none; }
-
 @media (max-width: 760px) {
-   .nav-bar { height: 64px; padding: 0 1rem; }
-   .nav-bar .hamburger-section, .nav-bar .nav, .nav-bar .user-section { display: none !important; }
-   .nav-bar .logo-section { margin: 0 auto; }
-   .nav-bar .logo-section a { width: 42px; height: 42px; }
+   .nav-bar {
+      height: 64px;
+      padding: 0 1rem;
+   }
+
+   .nav-bar .hamburger-section,
+   .nav-bar .nav,
+   .nav-bar .user-section {
+      display: none !important;
+   }
+
+   .nav-bar .logo-section {
+      margin: 0 auto;
+   }
+
+   .nav-bar .logo-section a {
+      width: 42px;
+      height: 42px;
+   }
+
    .mobile-bottom-nav {
       position: fixed;
       left: 0;
@@ -60,6 +75,7 @@
       justify-content: space-around;
       z-index: 1000;
    }
+
    .mobile-nav-item {
       flex: 1;
       max-width: 120px;
@@ -77,10 +93,12 @@
       text-decoration: none;
       cursor: pointer;
    }
+
    .mobile-nav-item svg { width: 24px; height: 24px; }
    .mobile-nav-item.active { color: $color-5; }
    .mobile-add { color: $color-5; }
    .mobile-add svg { width: 30px; height: 30px; }
+
    .mobile-avatar {
       width: 26px;
       height: 26px;
@@ -93,36 +111,8 @@
       font-size: .78rem;
       font-weight: 800;
    }
+
    .mobile-avatar img { width: 100%; height: 100%; object-fit: cover; }
    .guest-avatar svg { width: 18px; height: 18px; }
    body { padding-bottom: 68px; }
-   .nav { display: none !important; }
-}
-
-   .hamburger-section { display: none; }
-}
-
-@media (max-width: 760px) {
-   .nav-bar { height: 64px; padding: 0 1rem; }
-   .hamburger-section { display: block !important; order: 3; }
-   .hamburger-section button { width: 40px; height: 40px; display: grid; place-items: center; }
-   .hamburger-section svg { width: 24px; }
-   .nav {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      padding: .75rem 1rem 1rem;
-      flex-direction: column !important;
-      align-items: stretch !important;
-      background: #fff;
-      border-bottom: 1px solid #e7ecea;
-      box-shadow: 0 12px 20px rgba(22, 42, 38, .08);
-      transform: translateY(-10px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .2s ease, transform .2s ease;
-   }
-   .nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-   .nav a { width: 100%; }
 }
