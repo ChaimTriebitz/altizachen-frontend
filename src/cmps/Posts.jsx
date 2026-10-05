@@ -28,7 +28,7 @@ export const Posts = () => {
       } finally {
          setLoading(false)
       }
-   }, [])
+   }, [dispatch])
 
    useEffect(() => { loadPosts({ sort, category: category || undefined }) }, [loadPosts, sort, category])
 
