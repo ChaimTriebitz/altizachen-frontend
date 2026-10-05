@@ -3,6 +3,7 @@ import axios from 'axios'
 import { ACTIONS } from '../state'
 import { useGlobalState } from '../hooks'
 import { Post } from './Post'
+import { OPTIONS } from '../data'
 import API_URL from '../config/api'
 
 export const Posts = () => {
@@ -55,12 +56,7 @@ export const Posts = () => {
             <div className="search-field"><span>⌕</span><input aria-label="Search listings" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search listings…" /></div>
             <select aria-label="Category" value={category} onChange={e => setCategory(e.target.value)}>
                <option value="">All categories</option>
-               <option value="Electronics">Electronics</option>
-               <option value="Furniture">Furniture</option>
-               <option value="Clothing">Clothing</option>
-               <option value="Vehicles">Vehicles</option>
-               <option value="Home">Home</option>
-               <option value="Other">Other</option>
+               {OPTIONS.categories.map(categoryOption => <option key={categoryOption.name} value={categoryOption.name}>{categoryOption.name}</option>)}
             </select>
             <select aria-label="Sort listings" value={sort} onChange={e => setSort(e.target.value)}>
                <option value="newest">Newest</option>
