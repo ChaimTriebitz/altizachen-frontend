@@ -13,6 +13,7 @@ import { Chats } from './Chats.jsx'
 import { UserProfile } from './UserProfile.jsx'
 import { ImageLightbox } from './ImageLightbox.jsx'
 import { ListingActions } from './ListingActions.jsx'
+import { RecentlyViewed } from './RecentlyViewed.jsx'
 
 
 export {
