@@ -87,7 +87,7 @@ export const UserProfile = ({ onClose }) => {
       <div className="user-profile">
          <div className="profile-heading">
             <strong>Your profile</strong>
-            <button type="button" onClick={onClose} aria-label="Close profile">×</button>
+            {onClose && <button type="button" onClick={onClose} aria-label="Close profile">×</button>}
          </div>
          <form className="form" onSubmit={handleSubmit}>
             <div className="profile-avatar">
