@@ -15,7 +15,6 @@ import { ImageLightbox } from './ImageLightbox.jsx'
 import { ListingActions } from './ListingActions.jsx'
 import { RecentlyViewed } from './RecentlyViewed.jsx'
 
-
 export {
    UserProfile,
    YouTubeDownloader,
@@ -32,4 +31,5 @@ export {
    Chats,
    ImageLightbox,
    ListingActions,
+   RecentlyViewed,
 }
