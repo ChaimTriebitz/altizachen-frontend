@@ -1,124 +1,87 @@
 .form {
-   padding: 1em;
+   width: 100%;
+   display: flex;
    flex-direction: column;
-   max-width: 400px;
+   gap: 1rem;
 
-   .input {
-      position: relative;
-      flex-direction: column;
+   .input { display: flex; flex-direction: column; gap: .4rem; }
+   label { color: $color-4; font-size: .82rem; font-weight: 700; }
+   label span { float: right; color: $color-3; font-weight: 500; }
 
-      label {
-         font-weight: 500;
-         color: $color-9;
-
-         &[for="image"] {
-            min-height: 100px;
-
-            img {}
-         }
-
-         &.single {
-            img {
-               position: absolute;
-               inset: 0;
-               width: 100%;
-               height: 100%;
-               object-fit: contain;
-            }
-         }
-
-         &:hover::after {
-            opacity: 1 !important;
-
-         }
-
-         &:has(+ input[hidden])::after {
-            opacity: 0.25;
-            position: absolute;
-            inset: 0;
-            transition: 0.5s;
-            content: url('../../assets/imgs/upload-100.png');
-            font-size: 3em;
-            width: 100%;
-            height: 100%;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-
-         }
-
-         &:has(+ input:placeholder-shown) {
-            visibility: hidden;
-         }
-
-         &:has(+ select.no-value) {
-            visibility: hidden;
-         }
-
-
-      }
-
-      input,
-      select {
-         height: 2em;
-         width: 100%;
-         background-color: $color-9;
-         border-radius: 3px;
-         padding: 0 0.5em;
-         font-weight: 500;
-
-         &::placeholder {
-            color: $color-4;
-         }
-
-
-      }
-
-      .images {
-         position: absolute;
-         inset: 0;
-         justify-content: center;
-         align-items: center;
-         z-index: 0;
-
-         img {
-            // height: 50px;
-         }
-      }
-   }
-
-
-
-   button {
+   input:not([type="file"]), select, textarea {
       width: 100%;
-      background: $color-5;
-      color: $color-9;
-      padding: 0.75em 0;
-      font-weight: 500;
-      border-radius: 5px;
-      justify-content: center;
-   }
-
-   .error {
-      height: 1em;
-      margin-top: 0.5em;
+      border: 1px solid #dbe4e1;
+      border-radius: 10px;
+      background: #fff;
       color: $color-4;
+      padding: .75rem .85rem;
+      transition: border-color .18s ease, box-shadow .18s ease;
    }
+   textarea { min-height: 130px; resize: vertical; }
+   input:not([type="file"]):focus, select:focus, textarea:focus { border-color: $color-5; box-shadow: 0 0 0 4px rgba(15, 118, 110, .1); }
+   input::placeholder, textarea::placeholder { color: #98a6a2; }
 
-   nav {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      gap: 1em;
-      margin-top: 1em;
+   .error { margin: 0; padding: .7rem .8rem; border-radius: 9px; background: #fff0ed; color: #a83e27; font-size: .85rem; font-weight: 600; }
+   .success { margin: 0; padding: .7rem .8rem; border-radius: 9px; background: #edf8f4; color: $color-5; font-size: .85rem; font-weight: 600; }
+}
 
-      a {
-         flex: 1;
-         text-align: center;
-         background: $color-2;
-         color: $color-9;
-         padding: 0.25em 0;
-      }
-   }
+.auth-page {
+   justify-content: center;
+   align-items: center;
+   padding: 3rem 1rem;
+   background: radial-gradient(circle at top, #eef7f4 0, $color-9 45%);
+}
+.auth-card {
+   width: min(100%, 430px);
+   padding: 2rem;
+   background: #fff;
+   border: 1px solid #e3ebe8;
+   border-radius: 20px;
+   box-shadow: 0 18px 55px rgba(20, 52, 46, .08);
+}
+.auth-heading { margin-bottom: 1.5rem; }
+.auth-heading h1 { margin: .35rem 0 .4rem; font-size: clamp(1.7rem, 5vw, 2.15rem); line-height: 1.15; }
+.auth-heading p { color: $color-3; font-size: .9rem; }
+.auth-links { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; color: $color-5; font-size: .82rem; font-weight: 700; }
+.auth-links span { color: $color-3; font-weight: 500; }
+
+.avatar-upload { margin-top: -.15rem; }
+.avatar-dropzone {
+   width: 88px; height: 88px; border: 1px dashed #b9cbc6; border-radius: 50%;
+   background: $color-2; display: grid; place-items: center; overflow: hidden; text-align: center;
+   color: $color-5; font-size: .7rem; font-weight: 700;
+}
+.avatar-dropzone img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-dropzone small { display: block; color: $color-3; font-weight: 500; }
+
+.create-page { background: #f1f5f3; padding: 2.5rem 1rem 4rem; }
+.create-card { width: min(100%, 850px); margin: auto; padding: 2rem; background: #fff; border: 1px solid #e1e9e6; border-radius: 20px; box-shadow: 0 14px 45px rgba(20, 52, 46, .06); }
+.create-heading { margin-bottom: 1.5rem; }
+.create-heading .eyebrow { margin-top: .75rem; }
+.create-heading h1 { margin: .25rem 0 .35rem; font-size: clamp(1.8rem, 5vw, 2.4rem); }
+.create-heading p { color: $color-3; }
+.create-form { max-width: none; }
+.form-row { display: grid; grid-template-columns: 1.6fr 1fr .9fr; gap: 1rem; }
+.photo-input > label { display: flex; justify-content: space-between; }
+.photo-input > label span { color: $color-3; }
+.photo-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
+.photo-grid img, .add-photo { width: 100%; aspect-ratio: 1; border-radius: 12px; }
+.photo-grid img { object-fit: cover; border: 1px solid #e0e8e5; }
+.add-photo { border: 1px dashed #b9cbc6; background: $color-2; display: grid; place-items: center; align-content: center; color: $color-5; }
+.add-photo strong { font-size: 1.6rem; line-height: 1; }
+.add-photo span { font-size: .72rem; font-weight: 700; }
+
+.profile-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+.profile-heading button { width: 28px; height: 28px; border-radius: 50%; background: #f1f5f3; font-size: 1.1rem; }
+.profile-avatar { display: grid; place-items: center; margin: .25rem 0 .5rem; }
+.profile-avatar label { position: relative; width: 64px; height: 64px; overflow: hidden; border-radius: 50%; background: $color-8; }
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.profile-avatar span { position: absolute; inset: auto 0 0; padding: .2rem; text-align: center; background: rgba(0,0,0,.55); color: #fff; font-size: .52rem; }
+.logout-btn { width: 100%; min-height: 40px; border: 1px solid #e1e7e5; border-radius: 10px; color: #a83e27; font-weight: 700; }
+
+@media (max-width: 650px) {
+   .auth-card, .create-card { padding: 1.25rem; border-radius: 16px; }
+   .form-row { grid-template-columns: 1fr; }
+   .photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+   .auth-links { flex-direction: column; align-items: center; }
 }
