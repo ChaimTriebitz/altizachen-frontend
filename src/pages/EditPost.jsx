@@ -69,7 +69,7 @@ export const EditPost = () => {
          })
          navigate('/listing/' + id)
       } catch (error) {
-         setErr(error?.response?.data?.message || 'Could not update your listing.')
+         setErr(error?.response?.data?.message || error?.response?.data?.error || 'Could not update your listing.')
       } finally {
          setSaving(false)
       }
