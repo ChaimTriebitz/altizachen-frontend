@@ -11,6 +11,8 @@ import { CreatePost } from './CreatePost.jsx'
 import { Carousel } from './Carousel.jsx'
 import { Chats } from './Chats.jsx'
 import { UserProfile } from './UserProfile.jsx'
+import { ImageLightbox } from './ImageLightbox.jsx'
+import { ListingActions } from './ListingActions.jsx'
 
 
 export {
@@ -27,4 +29,6 @@ export {
    CreatePost,
    Carousel,
    Chats,
+   ImageLightbox,
+   ListingActions,
 }
