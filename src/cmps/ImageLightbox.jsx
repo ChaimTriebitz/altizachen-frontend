@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ImageDisplay } from './'
+import ImageDisplay from './ImageDisplay'
 
 export const ImageLightbox = ({ images = [], initialIndex = 0, onClose }) => {
    const [index, setIndex] = useState(initialIndex)
