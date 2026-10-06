@@ -20,7 +20,7 @@ export const NavBar = () => {
 
             <nav className="nav" aria-label="Main navigation">
                <NavLink to="/" end>Home</NavLink>
-               <NavLink to={loggedInUser ? '/create_post' : '/login'}>List</NavLink>
+               <NavLink to={loggedInUser ? '/create_post' : '/login'}>Sell</NavLink>
                {!loggedInUser && <NavLink to="/login">Log in</NavLink>}
                {!loggedInUser && <NavLink to="/register">Register</NavLink>}
             </nav>
@@ -45,7 +45,7 @@ export const NavBar = () => {
 
                <NavLink to={loggedInUser ? '/create_post' : '/login'} className="mobile-nav-item mobile-add">
                   <PlusIcon />
-                  <span>List</span>
+                  <span>Sell</span>
                </NavLink>
             </div>
 
