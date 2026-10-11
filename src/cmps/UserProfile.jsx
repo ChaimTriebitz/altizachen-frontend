@@ -13,7 +13,6 @@ export const UserProfile = ({ onClose }) => {
       email: loggedInUser?.email || '',
       avatar: loggedInUser?.avatar || ''
    })
-   const [imageChanged, setImageChanged] = useState(false)
    const [saving, setSaving] = useState(false)
    const [error, setError] = useState('')
    const [saved, setSaved] = useState(false)
@@ -29,7 +28,6 @@ export const UserProfile = ({ onClose }) => {
       const reader = new FileReader()
       reader.onloadend = () => {
          handleChange({ target: { name: 'avatar', value: reader.result } })
-         setImageChanged(true)
          setSaved(false)
          setError('')
       }
@@ -43,32 +41,17 @@ export const UserProfile = ({ onClose }) => {
       setSaved(false)
 
       try {
-         let avatar = loggedInUser?.avatar || ''
-
-         // Only upload when the user actually selected a new image.
-         // This prevents an existing Cloudinary public ID from being
-         // accidentally uploaded again during a normal profile save.
-         if (imageChanged && values.avatar?.startsWith('data:image/')) {
-            const uploadResponse = await axios.post(
-               API_URL + '/users/upload_image',
-               { image: values.avatar },
-               { headers: authHeaders }
-            )
-            avatar = uploadResponse.data.public_id
-         }
-
          const { data } = await axios.patch(
             API_URL + '/users',
             {
                username: values.username,
                email: values.email,
-               avatar
+               avatar: values.avatar
             },
             { headers: authHeaders }
          )
 
          dispatch({ type: ACTIONS.SET, entity: 'loggedInUser', payload: data.user || data })
-         setImageChanged(false)
          setSaved(true)
       } catch (err) {
          const message =
