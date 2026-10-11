@@ -39,7 +39,7 @@ export const CreatePost = () => {
       setErr('')
       setSaving(true)
       try {
-         await axios.post(API_URL + '/posts', values, { headers: { Authorization: 'Bearer ' + tok } })
+         await axios.post(API_URL + '/posts/upload', values, { headers: { Authorization: 'Bearer ' + tok } })
          navigate('/')
       } catch (error) {
          setErr(error?.response?.data?.message || 'Could not publish your listing. Please try again.')
