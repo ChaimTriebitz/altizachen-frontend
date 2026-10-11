@@ -126,7 +126,7 @@ npm run build
 npm test -- --watchAll=false
 ```
 
-The test command is provided by the project setup; automated coverage for the core user flows is still a work in progress.
+A small component smoke test runs in CI. Automated coverage for authentication, listing CRUD, and image uploads is still a work in progress.
 
 ## Security and configuration notes
 
