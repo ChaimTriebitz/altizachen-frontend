@@ -34,7 +34,7 @@ Altizachen is a responsive marketplace for discovering and listing second-hand i
 ## Repositories
 
 - [Frontend](https://github.com/ChaimTriebitz/altizachen-frontend)
-- [Backend API](https://github.com/ChaimTriebitz/altizachen-backend)
+- Backend API: a separate Express/MongoDB service; its source repository is currently private
 
 ## Architecture
 
