@@ -115,7 +115,7 @@ On Windows PowerShell, use `$env:PORT=3001; npm start` instead. Open [http://loc
 | POST | `/api/posts/upload` | Create a listing | Bearer token |
 | PUT | `/api/posts/:id` | Update an owned listing | Bearer token + ownership |
 | DELETE | `/api/posts/:id` | Delete an owned listing | Bearer token + ownership |
-| GET/PUT | `/api/users` | Read/update the current user | Bearer token |
+| GET/PATCH | `/api/users` | Read/update the current user | Bearer token |
 
 ## Quality checks
 
