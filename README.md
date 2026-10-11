@@ -1,5 +1,10 @@
 # Altizachen — Second-Hand Marketplace
 
+
+[![Frontend CI](https://github.com/ChaimTriebitz/altizachen-frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/ChaimTriebitz/altizachen-frontend/actions/workflows/ci.yml)
+
+![Altizachen marketplace preview](https://raw.githubusercontent.com/ChaimTriebitz/ct/master/public/projects/proj.altizachen.png)
+
 Altizachen is a responsive marketplace for discovering and listing second-hand items. The project includes a React web client and a separate Express/MongoDB API.
 
 > **Demo access:** The frontend is deployed on Vercel at [altizachen-frontend-ivory.vercel.app](https://altizachen-frontend-ivory.vercel.app). The current Vercel project has deployment-level SSO protection enabled, so public visitors may need access granted before this can be used as a recruiter-facing demo.
